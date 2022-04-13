@@ -234,7 +234,7 @@
         // 获取后台缓存的信息
         getMsg();
         $.ajax({
-            url: "loadProcess",
+            url: "localhost:8686/hbase-copy/loadProcess",
             type: "post",
             success: function (data) {
                 if (data.result === true) {
@@ -422,7 +422,7 @@
     // 读取已保存的连接信息
     function loadCon(type) {
         $.ajax({
-            url: "loadConnect",
+            url: "localhost:8686/hbase-copy/loadConnect",
             type: "post",
             dataType: "json",
             data: {"type": type},
