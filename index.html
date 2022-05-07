@@ -217,51 +217,36 @@
 
     var tables = [];
     var chooseTables = [];
+    var proNum = 0;
 
     var logDiv = document.getElementById("logDiv");
 
     $(document).ready(function () {
-        // 禁用组件
-        $(".inp").prop("disabled", true);
-        $("#startBtn").prop("disabled", true);
-        $("#stopBtn").prop("disabled", true);
-        $("#delBtn").prop("disabled", true);
-
-        logDiv.innerHTML += '<p>' + getTime() + '欢迎使用Hbase迁移工具，正在读取后台任务 ...</p>';
-        // 加载保存的数据库连接
-        loadCon(0);
-        loadCon(1);
-        // 获取后台缓存的信息
-        getMsg();
-        $.ajax({
-            url: "localhost:8686/hbase-copy/loadProcess",
-            type: "post",
-            success: function (data) {
-                if (data.result === true) {
-                    $("#tableNum").text(Object.keys(data.data.tableMap).length);
-                    $("#timeFrom").val(data.data.timeFrom);
-                    $("#timeTo").val(data.data.timeTo);
-                    for (const m in data.data.tableMap) {
-                        chooseTables.unshift(m);
-                    }
-                    if (data.data.status !== 1) {
-                        $("#stopBtn").prop("disabled", false);
-                        //自动获取后台的进度信息
-                        auto = window.setInterval(getMsg, 2000);
-                    } else {
-                        logDiv.innerHTML += '<p>' + getTime() + '当前任务暂停中，已读取配置</p>';
-                        $(".inp").prop("disabled", false);
-                        $("#startBtn").prop("disabled", false);
-                    }
-                } else {
-                    logDiv.innerHTML += '<p>' + getTime() + '没有正在迁移中的任务</p>';
-                    $(".inp").prop("disabled", false);
-                    $("#startBtn").prop("disabled", false);
-                }
-            }
-
-        });
+        logDiv.innerHTML += '<p>' + getTime() + '欢迎光临，正在载入 ...</p>';
+        //自动获取后台的进度信息
+        auto = window.setInterval(loadProcess, 1000);
     });
+
+    function loadProcess() {
+        proNum += RandomNumBoth();
+        if (proNum >= 100) {
+            proNum = 100;
+            clearInterval(auto);
+        }
+        $("#progressBar").width(proNum);
+        $("#progressValue").text(proNum);
+    }
+
+    function RandomNumBoth() {
+
+        var Rand = Math.random();
+
+        var num = 1 + Math.round(Rand * 9); //四舍五入
+
+        return num;
+
+    }
+
 
     // 清空选中的表
     function clearTables() {
@@ -422,7 +407,7 @@
     // 读取已保存的连接信息
     function loadCon(type) {
         $.ajax({
-            url: "localhost:8686/hbase-copy/loadConnect",
+            url: "loadConnect",
             type: "post",
             dataType: "json",
             data: {"type": type},
