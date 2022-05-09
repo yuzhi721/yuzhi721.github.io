@@ -1,560 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-<style type="text/css">
 
-    #sourceDiv {
-        float: left;
-        height: 300px;
-        width: 17%;
-        margin-left: 3%;
-    }
-
-    #targetDiv {
-        float: right;
-        height: 300px;
-        width: 25%;
-        margin-right: 3%;
-    }
-
-    #progressDiv {
-        float: left;
-        height: 300px;
-        width: 50%;
-        margin-left: 2%;
-    }
-
-    #tableDiv {
-        float: left;
-        height: 240px;
-        width: 38%;
-        margin-left: 3%;
-    }
-
-    #configDiv {
-        float: right;
-        height: 240px;
-        width: 55%;
-        margin-right: 3%;
-    }
-
-    li:hover {
-        background-color: #eabcb4 !important;
-        cursor: pointer;
-    }
-
-    input {
-        float: right;
-        margin-right: 2%;
-        height: 20px;
-    }
-
-    button {
-        float: right;
-    }
-
-
-</style>
-<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
-<!-- 新 Bootstrap 核心 CSS 文件 -->
-<link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <head>
     <meta charset="UTF-8">
-    <title>Hbase数据迁移工具</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <title>niwo</title>
+    <link rel="stylesheet" type="text/css" href="./css/FiraCode.css">
+    <link rel="stylesheet" type="text/css" href="./css/nutssss.css">
+    <link rel="icon" href="./favicon.ico">
 </head>
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+<script src="./js/yuzhi.js" type="module"></script>
+
 <body>
-<div>
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="btn btn-info" style="font-size: 18px;text-shadow: black 5px 3px 3px;">
-                    <span class="glyphicon glyphicon-hdd"></span> Hbase数据迁移
-                </button>
-            </div>
+<div id="box">
+    <!-- 个人资料卡片 -->
+    <div class="meBox">
+        <!-- 头像 -->
+        <div class="headPhoto"></div>
+        <!-- 介绍 -->
+        <div class="meBox-title">
+            <p>I'm Yuzhi</p>
+            <div class="fg"></div>
         </div>
-    </nav>
-
-
-    <form role="form">
-        <div id="sourceDiv" class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">源数据库</h3>
-            </div>
-            <div class="panel-body">
-                <div class="input-group form-group">
-                    <span class="input-group-addon">地址：</span>
-                    <input id="saddress" type="text" class="form-control inp" placeholder="127.0.0.1">
-                </div>
-                <div class="input-group form-group">
-                    <span class="input-group-addon">用户：</span>
-                    <input id="sname" type="text" class="form-control inp" placeholder="user">
-                </div>
-                <div class="input-group form-group">
-                    <span class="input-group-addon">密码：</span>
-                    <input id="spassword" type="password" class="form-control inp" placeholder="password">
-                </div>
-                <div class="input-group form-group">
-                    <span class="input-group-addon">库名：</span>
-                    <input id="sschema" type="text" class="form-control inp" placeholder="schema">
-                </div>
-                <button type="button" onclick=saveCon(0) class="btn btn-default inp" title="保存连接信息">保存</button>
-                <button type="button" onclick=loadCon(0) style="margin-right: 10px" title="读取保存的连接信息"
-                        class="btn btn-default inp">读取
-                </button>
-                <button type="button" onclick=checkCon(0) style="margin-right: 10px" title="连接源数据库并读取所有表"
-                        class="btn btn-default inp">连接
-                </button>
-            </div>
+        <div class="meBox-text">
+            <p>在职程序员<img src="./img/fish.png" alt="咸鱼" style="width: 20px; vertical-align: middle;"></p>
+            <p>爱好编程，打游戏</p>
+            <p>瞎折腾浪费时间最在行</p>
+            <p>最爱<img src="./img/002.png" alt="冰激凌" style="width: 15px; vertical-align: middle;"></p>
+            <p class="loveTime"></p>
         </div>
-    </form>
-
-
-    <div id="progressDiv" class="panel panel-success">
-        <div class="panel-heading">
-            <h4 class="panel-title" style="text-align: center">进度显示</h4>
-        </div>
-        <div class="panel-body">
-            <div class="progress progress-striped active">
-                <div id="progressBar" class="progress-bar" role="progressbar" aria-valuenow="0"
-                     aria-valuemin="0" aria-valuemax="100">
-                    <span id="progressValue"></span>
-                </div>
-            </div>
-            <div id="logDiv" style="height:200px;overflow-y:scroll;"></div>
+        <!-- 两个按钮 -->
+        <div class="meBox-Button">
+            <a href="#">关于</a>
+            <a href="#">联系</a>
         </div>
     </div>
 
-    <form role="form">
-        <div id="targetDiv" class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title">目标数据库</h3>
+    <!-- 伪终端介绍 -->
+    <div id="cmdBox">
+        <!-- 第一个终端 -->
+        <div class="cmd">
+            <!-- 三个按钮 -->
+            <div class="click">
+                <div class="red"></div>
+                <div class="yellow"></div>
+                <div class="green"></div>
             </div>
-            <div class="panel-body">
-                <div class="input-group form-group">
-                    <span class="input-group-addon">地址：</span>
-                    <input id="taddress" type="text" class="form-control inp" placeholder="127.0.0.1">
-                </div>
-                <div class="input-group form-group">
-                    <span class="input-group-addon">用户：</span>
-                    <input id="tname" type="text" class="form-control inp" placeholder="user">
-                </div>
-                <div class="input-group form-group">
-                    <span class="input-group-addon">密码：</span>
-                    <input id="tpassword" type="password" class="form-control inp" placeholder="password">
-                </div>
-                <div class="input-group form-group">
-                    <span class="input-group-addon">库名：</span>
-                    <input id="tschema" type="text" class="form-control inp" placeholder="schema">
-                </div>
-                <button type="button" id="delBtn" onclick=delData() class="btn btn-danger inp" title="删除目标数据库数据">删除
-                </button>
-                <button type="button" onclick=saveCon(1) title="保存连接信息" style="margin-right: 10px"
-                        class="btn btn-default inp">保存
-                </button>
-                <button type="button" onclick=loadCon(1) title="读取保存的连接信息" style="margin-right: 10px"
-                        class="btn btn-default inp">读取
-                </button>
-                <button type="button" onclick=checkCon(1) title="连接至目标数据库" style="margin-right: 10px"
-                        class="btn btn-default inp">连接
-                </button>
+            <!-- 顶部标题 -->
+            <div class="title">
+                <span>loveyp - bash</span>
+            </div>
+            <!-- 终端内文字 -->
+            <div class="cmdText">
+                <span style="color: rgb(0, 190, 0);">root@yuzhi</span>
+                <span style="color: blue;">~</span>
+                <span style="color: rgb(39, 39, 39);">./tianqi.sh</span>
+                <br/>
+                <iframe scrolling="no" src="https://tianqiapi.com/api.php?style=tb&skin=pitaya" frameborder="0"
+                        width="350" height="24" allowtransparency="true"></iframe>
+                <br/>
+                <span style="color: rgb(0, 190, 0);">root@yuzhi</span>
+                <span style="color: blue;">~</span>
+                <span style="color: rgb(39, 39, 39);">cat /me.txt</span>
+                <p>叽里呱啦一顿说</p>
+                <p>1</p>
+                <p>2</p>
+                <p>3</p>
+                <p>待编辑...</p>
+                <span style="color: rgb(0, 190, 0);">root@yuzhi</span>
+                <span style="color: blue;">~</span>
+                <span style="color: rgb(39, 39, 39);">sudo rm -rf /过去的自己/*</span>
             </div>
         </div>
-    </form>
-
-    <form role="form">
-        <div id="tableDiv" class="panel panel-warning">
-            <div class="panel-heading">
-                <h3 class="panel-title">源数据表</h3>
+        <!-- 第二个终端 -->
+        <div class="cmd cmd2">
+            <!-- 三个按钮 -->
+            <div class="click">
+                <div class="red"></div>
+                <div class="yellow"></div>
+                <div class="green"></div>
             </div>
-            <div class="panel-body">
-                <ul id="tableul" class="list-group" style="height:170px;overflow-y:scroll;">
-                    <li class="list-group-item">请先连接源数据库</li>
+            <!-- 顶部标题 -->
+            <div class="title">
+                <span>loveyp - bash</span>
+            </div>
+            <!-- 终端内文字 -->
+            <div class="cmdText">
+                <span style="color: rgb(0, 190, 0);">root@yuzhi</span>
+                <span style="color: blue;">~</span>
+                <span style="color: rgb(39, 39, 39);">./links.sh</span>
+                <p>今天想干什么：</p>
+                <ul class="ul">
+                    <!--<li><a href="#">Blog</a></li>
+                    <li><a href="#">Love</a></li>
+                    <li><a href="#">Note</a></li>
+                    <li><a href="#">Mc</a></li>
+                    <li><a href="#">McBlog</a></li>-->
                 </ul>
+                <span style="color: rgb(0, 190, 0);">root@yuzhi</span>
+                <span style="color: blue;">~</span>
             </div>
         </div>
-    </form>
-
-    <form role="form">
-        <div id="configDiv" class="panel panel-danger">
-            <div class="panel-heading">
-                <h3 class="panel-title">配置</h3>
-            </div>
-            <div class="panel-body">
-                当前选中<span id="tableNum" class="badge">0</span>张表
-                <button id="clearBtn" type="button" onclick=clearTables() title="清空选中的表" style="margin-right: 520px"
-                        class="btn btn-danger">清空选中
-                </button>
-
-
-                <div class="input-group form-group" style="width: 50px;">
-                    <span class="input-group-addon">时间区间：</span>
-                    <input id="timeFrom" type="datetime-local" class="form-control inp" value="2021-01-01T12:30">
-                    <span class="input-group-addon"> - </span>
-                    <input id="timeTo" type="datetime-local" class="form-control inp" value="2021-01-01T12:31">
-                </div>
-                <div class="input-group form-group" style="width: 180px;">
-                    <span class="input-group-addon">流量：</span>
-                    <input id="amount" type="number" class="form-control inp" value="10000">
-                </div>
-                <button id="stopBtn" type="button" onclick=stopCopy() title="停止迁移并保存当前进度" class="btn btn-danger">停止迁移
-                </button>
-                <button id="startBtn" type="button" onclick=startCopy() title="开始或继续迁移" style="margin-right: 10px"
-                        class="btn btn-success">开始迁移
-                </button>
-            </div>
-            <br>
-        </div>
-    </form>
-
+    </div>
 </div>
 
+<!-- 页脚 -->
+<div id="footer">
+    <p>© 2022 YUZHI | <a href="http://beian.miit.gov.cn">赣ICP备52013140号</a></p>
+    <p>THEME MADE BY <a href="https://yuzhi721.github.io/">Yuzhi</a></p>
+</div>
 </body>
-<script type="text/javascript">
 
-    //定时器
-    var auto;
-
-    var tables = [];
-    var chooseTables = [];
-    var proNum = 0;
-
-    var logDiv = document.getElementById("logDiv");
-
-    $(document).ready(function () {
-        logDiv.innerHTML += '<p>' + getTime() + '欢迎光临，正在载入 ...</p>';
-        //自动获取后台的进度信息
-        auto = window.setInterval(loadProcess, 1000);
-    });
-
-    function loadProcess() {
-        proNum += RandomNumBoth();
-        if (proNum >= 100) {
-            proNum = 100;
-            clearInterval(auto);
-        }
-        $("#progressBar").width(proNum + "%");
-        $("#progressValue").text(proNum + "%");
-    }
-
-    function RandomNumBoth() {
-
-        var Rand = Math.random();
-
-        var num = 1 + Math.round(Rand * 9); //四舍五入
-
-        return num;
-
-    }
-
-
-    // 清空选中的表
-    function clearTables() {
-        chooseTables = [];
-        $("#tableNum").text('0');
-        $("ul li").css("background-color", "rgb(255, 255, 255)");
-        $("ul li").css("font-weight", "400");
-    }
-
-
-    //连接数据库
-    function checkCon(type) {
-        var address;
-        var name;
-        var password;
-        var schema;
-        if (type === 0) {
-            address = $("#saddress").val().trim();
-            name = $("#sname").val().trim();
-            password = $("#spassword").val().trim();
-            schema = $("#sschema").val().trim();
-        } else {
-            address = $("#taddress").val().trim();
-            name = $("#tname").val().trim();
-            password = $("#tpassword").val().trim();
-            schema = $("#tschema").val().trim();
-        }
-        if (address === '') {
-            alert("地址不能为空！");
-            return;
-        }
-        if (schema === '') {
-            alert("库名不能为空！");
-            return;
-        }
-        $.ajax({
-            url: "checkConnect",
-            type: "post",
-            dataType: "json",
-            contentType: 'application/json',
-            data: JSON.stringify({
-                "type": type,
-                "address": address,
-                "userName": name,
-                "password": password,
-                "schema": schema
-            }),
-            success: function (data) {
-                if (data.result === true) {
-                    if (type === 0) {
-                        tables = data.data;
-                        const a = document.getElementById("tableul");
-                        $("#tableul").find("li").remove();
-                        chooseTables = [];
-                        $("#tableNum").text(0);
-                        a.innerHTML = '<li onclick=chooseTable(this) class="list-group-item">全部</li>';
-                        for (let i = 0; i < tables.length; i++) {
-                            a.innerHTML += '<li onclick=chooseTable(this) class="list-group-item">' + tables[i] + '</li>';
-                        }
-                        alert("连接源数据库成功，已读取所有源数据表");
-                    } else {
-                        alert("连接目标数据库成功");
-                    }
-                } else {
-                    alert("数据库连接失败,请校验");
-                }
-            }
-        });
-    }
-
-    // 选择源数据库表
-    function chooseTable(obj) {
-        if ($(obj).css("font-weight") !== "400") {
-            $(obj).css("background-color", "rgb(255, 255, 255)");
-            $(obj).css("font-weight", "400");
-            if ($(obj).text() === "全部") {
-                $("#tableNum").text(0);
-                chooseTables = [];
-                $(obj).siblings().css("background-color", "rgb(255, 255, 255)");
-                $(obj).siblings().css("font-weight", "400");
-            } else {
-                $("#tableNum").text(Number($("#tableNum").text()) - 1);
-                chooseTables.splice(chooseTables.indexOf($(obj).text()), 1);
-            }
-        } else {
-            $(obj).css("background-color", "rgb(234, 188, 180)");
-            $(obj).css("font-weight", "Bold");
-            if ($(obj).text() === "全部") {
-                $("#tableNum").text(tables.length);
-                $(obj).siblings().css("background-color", "rgb(234, 188, 180)");
-                $(obj).siblings().css("font-weight", "Bold");
-                chooseTables = tables;
-            } else {
-                chooseTables.unshift($(obj).text());
-                $("#tableNum").text(Number($("#tableNum").text()) + 1);
-            }
-        }
-    }
-
-    // 保存连接
-    function saveCon(type) {
-        var address;
-        var name;
-        var password;
-        var schema;
-        if (type === 0) {
-            address = $("#saddress").val().trim();
-            name = $("#sname").val().trim();
-            password = $("#spassword").val().trim();
-            schema = $("#sschema").val().trim();
-        } else {
-            address = $("#taddress").val().trim();
-            name = $("#tname").val().trim();
-            password = $("#tpassword").val().trim();
-            schema = $("#tschema").val().trim();
-        }
-        if (address === '') {
-            alert("地址不能为空！");
-            return;
-        }
-        $.ajax({
-            url: "saveConnect",
-            type: "post",
-            dataType: "json",
-            contentType: 'application/json',
-            data: JSON.stringify({
-                "type": type,
-                "address": address,
-                "userName": name,
-                "password": password,
-                "schema": schema
-            }),
-            success: function (data) {
-                if (data === true) {
-                    alert("保存连接信息成功");
-                } else {
-                    alert("保存连接信息失败");
-                }
-            }
-        });
-    }
-
-    // 删除数据
-    function delData() {
-        const r = confirm("确定删除本次迁移数据？");
-        if (r) {
-            $.ajax({
-                url: "deleteData",
-                type: "post",
-                dataType: "json",
-                success: function (data) {
-                    getMsg();
-                }
-            });
-        }
-    }
-
-    // 读取已保存的连接信息
-    function loadCon(type) {
-        $.ajax({
-            url: "loadConnect",
-            type: "post",
-            dataType: "json",
-            data: {"type": type},
-            success: function (data) {
-                if (type === 0) {
-                    $("#saddress").val(data["address"]);
-                    $("#sname").val(data["userName"]);
-                    $("#spassword").val(data["password"]);
-                    $("#sschema").val(data["schema"]);
-                } else {
-                    $("#taddress").val(data["address"]);
-                    $("#tname").val(data["userName"]);
-                    $("#tpassword").val(data["password"]);
-                    $("#tschema").val(data["schema"]);
-                }
-            }
-        });
-    }
-
-    // 获取当前时间  yyyy-MM-dd hh:mm:ss.sss
-    function getTime() {
-        var myDate = new Date();
-        var myYear = myDate.getFullYear(); //获取完整的年份(4位,1970-????)
-        var myMonth = myDate.getMonth() + 1; //获取当前月份(0-11,0代表1月)
-        var myToday = myDate.getDate(); //获取当前日(1-31)
-        var myHour = myDate.getHours(); //获取当前小时数(0-23)
-        var myMinute = myDate.getMinutes(); //获取当前分钟数(0-59)
-        var mySecond = myDate.getSeconds(); //获取当前秒数(0-59)
-        var Millisecond = myDate.getMilliseconds();
-        var nowTime;
-        nowTime = myYear + '-' + fillZero(myMonth) + '-' + fillZero(myToday) + ' ' + fillZero(myHour) + ':' +
-            fillZero(myMinute) + ':' + fillZero(mySecond) + '.' + Millisecond + ' ';
-        return nowTime;
-    }
-
-    function fillZero(str) {
-        let realNum;
-        if (str < 10) {
-            realNum = '0' + str;
-        } else {
-            realNum = str;
-        }
-        return realNum;
-    }
-
-    // 开始迁移
-    function startCopy() {
-        if (chooseTables.length < 1) {
-            alert("请选择需要迁移的表");
-            return;
-        }
-
-        logDiv.innerHTML += '<p>' + getTime() + '开始迁移 ...</p>';
-        logDiv.scrollTop = logDiv.scrollHeight;
-        const sourceCon = {};
-        sourceCon.type = 0;
-        sourceCon.address = $("#saddress").val().trim();
-        sourceCon.userName = $("#sname").val().trim();
-        sourceCon.password = $("#spassword").val().trim();
-        sourceCon.schema = $("#sschema").val().trim();
-        const targetCon = {};
-        targetCon.type = 1;
-        targetCon.address = $("#taddress").val().trim();
-        targetCon.userName = $("#tname").val().trim();
-        targetCon.password = $("#tpassword").val().trim();
-        targetCon.schema = $("#tschema").val().trim();
-        $.ajax({
-            url: "startCopy",
-            type: "post",
-            dataType: "json",
-            contentType: 'application/json',
-            data: JSON.stringify({
-                "sourceCon": sourceCon,
-                "targetCon": targetCon,
-                "chooseTables": chooseTables,
-                "timeFrom": $("#timeFrom").val(),
-                "timeTo": $("#timeTo").val()
-            }),
-            success: function (data) {
-                logDiv.innerHTML += '<p>' + data.data + '</p>';
-                logDiv.scrollTop = logDiv.scrollHeight;
-                if (data.result === true) {
-                    $("#progressBar").width("1%");
-                    $("#progressValue").text("1%");
-                    // 禁用组件
-                    $(".inp").prop("disabled", true);
-                    $("#startBtn").prop("disabled", true);
-                    $("#stopBtn").prop("disabled", false);
-                    //自动获取后台的进度信息
-                    auto = window.setInterval(getMsg, 2000);
-                } else {
-                    getMsg();
-                }
-            }
-        });
-    }
-
-    // 停止迁移
-    function stopCopy() {
-        $.ajax({
-            url: "stopCopy",
-            type: "post",
-            success: function (data) {
-                // 启用组件
-                $(".inp").prop("disabled", false);
-                $("#startBtn").prop("disabled", false);
-                $("#stopBtn").prop("disabled", true);
-                logDiv.innerHTML += '<p>' + getTime() + '停止迁移</p>';
-                clearInterval(auto);
-            }
-        });
-    }
-
-    //获取进度提示信息
-    function getMsg() {
-        $.ajax({
-            url: "monitor",
-            type: "post",
-            success: function (data) {
-                if (data.length > 0) {
-                    data.forEach(function (item) {
-                        const index = item.indexOf("process");
-                        if (index !== -1) {
-                            $("#progressBar").width(item.substr(index + 7));
-                            $("#progressValue").text(item.substr(index + 7));
-                            if (item.includes("allprocess100%")) {
-                                // 启用组件
-                                $(".inp").prop("disabled", false);
-                                $("#startBtn").prop("disabled", false);
-                                $("#stopBtn").prop("disabled", true);
-                                $("#delBtn").prop("disabled", false);
-
-                                $("#tableNum").text(0);
-                                $("#tableul").find("li").remove();
-                                document.getElementById("tableul").innerHTML = '<li class="list-group-item">请先连接源数据库</li>';
-                                clearInterval(auto);
-                            }
-                        } else {
-                            logDiv.innerHTML += '<p>' + item + '</p>';
-                        }
-
-                    });
-                    logDiv.scrollTop = logDiv.scrollHeight;
-                }
-            }
-        });
-    }
-
-</script>
 </html>
