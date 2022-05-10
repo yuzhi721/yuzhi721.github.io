@@ -13,5 +13,8 @@ export default {
     }, {
         "title": "玩游戏",
         "url": "https://www.yikm.net/"
+    }, {
+        "title": "去探索",
+        "url": "https://xn--flw351e.ml/"
     }]
 };
