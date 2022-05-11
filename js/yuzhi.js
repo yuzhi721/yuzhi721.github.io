@@ -5,7 +5,7 @@ window.onload = function () {
     r = c.reading;
     //$(".ul").empty();
     for (let i = 0; i < r.length; i++) {
-        $(".ul").append('<li><a href="' + r[i].url + '" target="_blank">' + r[i].title + '</a></li>');
+        $(".ul").append('<li><a href="' + r[i].url + '" target="_blank">' + r[i].title + '>></a></li>');
     }
     auto = window.setInterval(loveTime, 1000);
 };
@@ -23,6 +23,6 @@ function loveTime() {
     let hour = Math.floor((diff % days) / hours);
     let minute = Math.floor((diff % hours) / minutes);
     let second = Math.floor((diff % minutes) / seconds);
-    $(".loveTime").html('我们已相恋' + day + '天' + hour + '时' + minute + '分' + second + '秒');
+    $(".loveTime").html(day + '天' + hour + '时' + minute + '分' + second + '秒');
 
 }

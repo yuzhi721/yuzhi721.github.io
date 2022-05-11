@@ -1,6 +1,5 @@
 export default {
     loveTime: "2021/11/7 1:00",
-    giteeName: "N0ts",
     reading: [{
         "title": "看电影",
         "url": "https://www.mozhatu.com"
