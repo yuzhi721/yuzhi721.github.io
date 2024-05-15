@@ -1,5 +1,5 @@
 export default {
-    loveTime: "2021/11/7 1:00",
+    loveTime: "2022/10/22 1:00",
     reading: [{
         "title": "看电影",
         "url": "https://www.mozhatu.com"
